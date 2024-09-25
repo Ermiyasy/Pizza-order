@@ -12,10 +12,10 @@ app.use(express.json());
 
 // PostgreSQL connection
 const pool = new Pool({
-  user: 'your_db_user',
+  user: 'postgres',
   host: 'localhost',
-  database: 'pizza_ordering_service',
-  password: 'your_db_password',
+  database: 'pizzaDB',
+  password: 'ethiopia@1888',
   port: 5432,
 });
 
@@ -47,6 +47,7 @@ function defineAbilitiesFor(user) {
 
   return build();
 }
+
 
 // Register User
 app.post('/register', async (req, res) => {
