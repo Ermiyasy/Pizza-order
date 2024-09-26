@@ -13,7 +13,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "casl": "^0.2.0",
-    "@casl/ability": "^latest-version-here",
+    "@casl/ability": "^5.1.3",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.0",
