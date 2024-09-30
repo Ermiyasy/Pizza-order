@@ -6,9 +6,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { z } = require('zod');
 const { AbilityBuilder, Ability } = require('@casl/ability');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors()); // Enable CORS for all routes
 
 // PostgreSQL connection
 const pool = new Pool({
@@ -39,6 +41,7 @@ function defineAbilitiesFor(user) {
 
   if (user.role === 'restaurant_manager') {
     can('manage', 'Pizza');
+    can('manage', 'Users');
     can('read', 'Order');
   } else if (user.role === 'customer') {
     can('create', 'Order');
@@ -47,6 +50,7 @@ function defineAbilitiesFor(user) {
 
   return build();
 }
+
 
 
 // Register User
