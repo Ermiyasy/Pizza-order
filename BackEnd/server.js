@@ -39,6 +39,7 @@ function defineAbilitiesFor(user) {
 
   if (user.role === 'restaurant_manager') {
     can('manage', 'Pizza');
+    can('manage', 'Users');
     can('read', 'Order');
   } else if (user.role === 'customer') {
     can('create', 'Order');
@@ -114,6 +115,19 @@ app.post('/pizzas', authenticate, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// Fetch all users
+app.get('/users', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT name, email, role FROM users');
+    res.json({ users: result.rows });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
+// Test Endpoint
+app.get('/', (req, res) => {
+  res.send('Backend server is running.');
+});
 const port = 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
